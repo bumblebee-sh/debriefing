@@ -1,0 +1,16 @@
+@import "../../variables";
+:host{
+  display: block;
+  height: calc(100% - 65px);
+}
+.left_col{
+  width: $aside_width;
+  background: #fff;
+}
+.right_col{
+  padding: 20px;
+  width: calc(100% - #{$aside_width});
+}
+.user{
+  min-height: 100%;
+}

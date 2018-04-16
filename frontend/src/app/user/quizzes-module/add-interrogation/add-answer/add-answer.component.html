@@ -1,0 +1,17 @@
+<form class="form d-flex w-100" #f="ngForm" novalidate (submit)="f.valid && add_answer(f, answer.value)">
+  <input type="text" class="mr-2 form-control"  placeholder="Answer"
+         ngModel
+         #answer
+         name="answer"
+         [class.is-invalid]="(answer.invalid && answer.touched) || (answer.invalid && f.submitted)"
+         required>
+  <button type="submit" class="btn btn-success"><i class="material-icons">add</i></button>
+</form>
+<ul class="mt-2">
+  <li *ngFor="let ans of answers" class="d-flex w-100 justify-content-between"
+      (mouseleave)="disable_inp($event)">
+    <input type="text" value="{{ans.text}}" class="question_list__item mr-auto" #item disabled (keyup.enter)="disable_inp($event.target)">
+    <button class="btn btn-sm btn-info" type="button" (click)="edit_answer($event)"><i class="material-icons">mode_edit</i></button>
+    <button class="ml-2 btn-sm btn btn-danger" type="button" (click)="remove_answer(ans)"><i class="material-icons">delete_forever</i></button>
+  </li>
+</ul>

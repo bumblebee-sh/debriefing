@@ -1,0 +1,29 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <div class="row">
+        <div class="col">
+          <app-dashboard-filter (change_params)="load_data()"></app-dashboard-filter>
+        </div>
+      </div>
+      <ng-template #no_quizzes>
+        <div class="text-center">
+          <h3 class="m-5">No quizzes</h3>
+        </div>
+      </ng-template>
+      <div *ngIf="interrogations.length; else no_quizzes">
+        <div class="card-columns">
+          <app-quiz-card
+            class="card d-inline-block"
+            *ngFor="let card of interrogations"
+            [card]="card"
+            [current_quiz]="card.questions"
+          ></app-quiz-card>
+        </div>
+        <app-pagination [default_options]="def_param" [pages_counter]="pages_counter" (change_params)="load_data()"></app-pagination>
+      </div>
+    </div>
+  </div>
+</div>
+
+

@@ -1,0 +1,16 @@
+<form #f="ngForm" novalidate (submit)="search(f)" class="filter">
+  <div class="filter__options option">
+    <div class="option__title">Rating</div>
+    <div class="option__body">
+      <rating
+        name="rating"
+        [(ngModel)]="model.rating"
+        [score]="model.rating"
+        #rating="ngModel"
+      ></rating>
+    </div>
+  </div>
+  <div class="filter__options option ml-auto">
+    <button type="submit" class="btn-success btn">Search</button>
+  </div>
+</form>

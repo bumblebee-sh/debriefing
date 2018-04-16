@@ -1,0 +1,71 @@
+<form #f="ngForm" (submit)="f.valid && send(f)" novalidate>
+  <div class="form-group row">
+    <label for="inp_1" class="col-sm-4 col-form-label"> Name </label>
+    <div class="col-sm-8">
+      <input type="text" class="form-control" id="inp_1"
+             [(ngModel)]="model.name"
+             required
+             #name="ngModel"
+             name="name"
+             [class.is-invalid]="(name.invalid && name.touched) || (name.invalid && f.submitted)">
+      <div class="invalid-feedback">
+        Name is required.
+      </div>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="inp_2" class="col-sm-4 col-form-label"> Email </label>
+    <div class="col-sm-8">
+      <input type="email" class="form-control" id="inp_2" aria-describedby="emailHelp"
+             [(ngModel)]="model.email"
+             required
+             #email="ngModel"
+             name="email"
+             [class.is-invalid]="(email.invalid && email.touched) || (email.invalid && f.submitted)">
+      <div class="invalid-feedback">
+        Email is required.
+      </div>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="inp_3" class="col-sm-4 col-form-label">Your age</label>
+    <div class="col-sm-8">
+      <input type="number" min="0" class="form-control" id="inp_3" aria-describedby="emailHelp"
+             [(ngModel)]="model.age"
+             required
+             #age="ngModel"
+             name="age"
+             [class.is-invalid]="( (age.invalid || age.value < 18 ) && age.touched) || ( (age.invalid || age.value < 18 ) && f.submitted)">
+      <div class="invalid-feedback">
+        {{ age.value < 18 ? 'Please grow up!' : 'Age is required.'}}
+      </div>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="inp_text" class="col-sm-4 col-form-label">Feedback</label>
+    <div class="col-sm-8">
+      <textarea class="form-control" id="inp_text"
+             [(ngModel)]="model.text"
+             name="text"
+      ></textarea>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="inp_3" class="col-sm-4 col-form-label">Rate this poll</label>
+    <div class="col-sm-8">
+      <rating
+        name="rating"
+        [(ngModel)]="model.rating"
+        [score]="model.rating"
+        required
+        #rating="ngModel"
+        [class.is-invalid]="(rating.invalid && rating.touched) || (rating.invalid && f.submitted)">
+      ></rating>
+      <div class="invalid-feedback">
+        Please rate this poll.
+      </div>
+    </div>
+  </div>
+
+  <button type="submit" class="btn btn-primary w-100">Submit</button>
+</form>

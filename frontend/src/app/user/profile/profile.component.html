@@ -1,0 +1,17 @@
+<div class="d-flex">
+  <div class="left_col">
+      <app-profile-view></app-profile-view>
+  </div>
+  <div class="right_col">
+    <div class="tabs">
+      <app-tabs>
+        <app-tab title="Settings">
+          <app-profile-settings></app-profile-settings>
+        </app-tab>
+        <app-tab title="Quizzes">
+          <app-profile-quizzes [quizzes]="quizzes"></app-profile-quizzes>
+        </app-tab>
+      </app-tabs>
+    </div>
+  </div>
+</div>

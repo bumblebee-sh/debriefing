@@ -1,0 +1,65 @@
+<ng-template #no_mode>
+  <h1 class="page_title mb-4">Quizzes</h1>
+  <div class="mb-3 d-flex justify-content-end" *ngIf="quiz_list?.length;">
+    <button type="button" class="btn btn-primary" (click)="add_quiz()" >Add Quiz</button>
+  </div>
+  <div class="page_content">
+    <ng-template #no_item>
+      <div class="minh-100">
+        <h3 class="p-5 text-center">No Quizzes. Please <span class="first" (click)="change_mode()"> add first</span></h3>
+      </div>
+    </ng-template>
+    <table class="table" *ngIf="quiz_list?.length; else no_item">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col" class="w-100" (click)="sort_by('title', $event, 'string')">
+            Title
+            <span class="reverse_icon" *ngIf="!reverse">▼</span>
+            <span class="reverse_icon" *ngIf="reverse">▲</span>
+          </th>
+          <th scope="col" class="text-center" (click)="sort_by('added', $event, 'date')">
+            Added
+            <span class="reverse_icon" *ngIf="!reverse">▼</span>
+            <span class="reverse_icon" *ngIf="reverse">▲</span>
+          </th>
+          <th scope="col" class="text-center" (click)="sort_by('viewed', $event)">
+            Viewed
+            <span class="reverse_icon" *ngIf="!reverse">▼</span>
+            <span class="reverse_icon" *ngIf="reverse">▲</span>
+          </th>
+          <th scope="col" class="text-center" (click)="sort_by('passed', $event)">
+            Passed
+            <span class="reverse_icon" *ngIf="!reverse">▼</span>
+            <span class="reverse_icon" *ngIf="reverse">▲</span>
+          </th>
+          <th scope="col" class="text-center" (click)="sort_by('rating', $event)">
+            Rating
+            <span class="reverse_icon" *ngIf="!reverse">▼</span>
+            <span class="reverse_icon" *ngIf="reverse">▲</span>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let quiz of quiz_list | sortBy: order: reverse: type ; let i = index;">
+          <td>{{i + 1}}</td>
+          <td>{{quiz.title}}</td>
+          <td class="text-center">{{quiz.added | date:'dd/MM/yyyy HH:mm:ss' }}</td>
+          <td class="text-center" >{{quiz.viewed}}</td>
+          <td class="text-center">{{quiz.passed.length}}</td>
+          <td class="text-nowrap">
+            <rating [score]="quiz.rating" [disable]="true"></rating>
+          </td>
+          <td class="text-nowrap btns">
+            <button [routerLink]="['detail', quiz._id]" type="button" class="btn btn-sm btn-info"><i class="material-icons">assignment</i></button>
+            <button type="button" class="btn btn-sm btn-primary" (click)="edit_quiz(quiz)"><i class="material-icons">mode_edit</i></button>
+            <button type="button" class="btn btn-sm btn-danger" (click)="delete_quiz(quiz)" ><i class="material-icons">delete</i></button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</ng-template>
+
+<app-add-interrogation *ngIf="add_question_mode; else no_mode" (to_quiz_list)="change_mode($event)" [model]="model" ></app-add-interrogation>

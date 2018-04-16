@@ -1,0 +1,21 @@
+<form class="form-inline" #f="ngForm" novalidate (submit)="f.valid && add_question(f)">
+  <div class="form-group mr-2 mb-2">
+    <input type="text" class="form-control"  placeholder="Question"
+           [(ngModel)]="question_text"
+           #question="ngModel"
+           name="question"
+           [class.is-invalid]="(question.invalid && question.touched) && (question.invalid && f.submitted)"
+           required>
+  </div>
+  <button type="submit" class="btn btn-success mb-2">Add question</button>
+</form>
+<ul class="mt-2 question_list">
+  <li *ngFor="let ans of questions; let i = index" class="d-flex w-100 justify-content-end"
+      (click)="pick_question(ans, $event)"
+      (mouseleave)="disable_inp($event)"
+  >
+    <input type="text" value="{{ans.text}}" class="question_list__item mr-auto" #item disabled (keyup.enter)="disable_inp($event.target)">
+    <button class="btn btn-info btn-sm" type="button" (click)="edit_question($event)"><i class="material-icons">mode_edit</i></button>
+    <button class="ml-2 btn btn-danger btn-sm" type="button" (click)="remove_question(ans)"><i class="material-icons">delete_forever</i></button>
+  </li>
+</ul>

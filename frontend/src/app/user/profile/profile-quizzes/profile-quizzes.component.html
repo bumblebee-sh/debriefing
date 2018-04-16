@@ -1,0 +1,24 @@
+<div class="container">
+  <div class="row mb-4">
+    <div class="col">
+      <a class="btn btn-primary" [routerLink]="[ '/'+url_part, 'interrogations']">Add quiz</a>
+    </div>
+  </div>
+  <div class="row" *ngIf="quizzes.length; else no_quiz">
+    <div class="col-md-6 mb-5" *ngFor="let card of quizzes">
+      <app-quiz-card
+        class="card d-inline-block"
+        [card]="card"
+        [preview]="'true'"
+        [current_quiz]="card.questions"
+      ></app-quiz-card>
+    </div>
+  </div>
+  <ng-template #no_quiz>
+    <div class="row">
+      <div class="col">
+        <div class="h3 text-center m-5">No quiz.</div>
+      </div>
+    </div>
+  </ng-template>
+</div>

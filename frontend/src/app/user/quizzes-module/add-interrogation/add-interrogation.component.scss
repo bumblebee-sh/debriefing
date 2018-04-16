@@ -1,0 +1,19 @@
+:host{
+  display: block;
+}
+.preview_col{
+  max-width: 327px;
+  padding-top: 55px;
+  app-quiz-card{
+    display: block;
+    width: 100%;
+  }
+}
+app-quiz-card{
+  max-width: 100%;
+}
+
+.add_answer{
+  padding-left: 10px;
+  border-left: 1px solid #e6e6e6;
+}

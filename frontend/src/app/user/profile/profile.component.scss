@@ -1,0 +1,8 @@
+$left_col: 320px;
+.left_col{
+  width: $left_col;
+}
+.right_col{
+  width: calc(100% - #{$left_col});
+}
+

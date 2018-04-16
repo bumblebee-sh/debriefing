@@ -1,0 +1,65 @@
+
+<div class="row" *ngIf="!add_answers_mode; else add_answers">
+  <div class="col">
+    <h1 class="mb-4">Add new poll</h1>
+    <button type="button" class="btn btn-primary mb-3" (click)="back()">Back</button>
+    <form #f="ngForm" novalidate (submit)="f.valid && save(f)" class="box-content">
+      <div class="form-group">
+        <label for="input_1">Title</label>
+        <input type="text" class="form-control" id="input_1"
+               required
+               name="title"
+               #title="ngModel"
+               [(ngModel)]="model.title"
+               [class.is-invalid]="(title.invalid && title.touched && title.value) || (title.invalid && f.submitted && title.touched)">
+      </div>
+      <div class="form-group">
+        <label for="validatedCustomFile">Image</label>
+        <div class="custom-file">
+          <input type="file" class="custom-file-input" id="validatedCustomFile"
+                 [class.is-invalid]="img_err"
+                 (change)="image_pick($event)"
+                 name="image"
+                 accept="image/*"
+                 [(ngModel)]="image">
+          <label class="custom-file-label" for="validatedCustomFile">{{img_text}}</label>
+          <div class="invalid-feedback">Over 2mb</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="input_2">Description</label>
+        <textarea class="form-control" id="input_2"
+                  name="description"
+                  [(ngModel)]="model.description"
+        ></textarea>
+      </div>
+      <button type="submit" class="btn btn-success">{{ edit_mode ? 'Edit' : 'Save' }}</button>
+      <button type="button" class="btn btn-primary" (click)="answer_mode()">Add questions</button>
+      <div class="mt-2" *ngIf="question_err">
+        <small class="text-danger">
+          Please add questions/answers
+        </small>
+      </div>
+    </form>
+  </div>
+  <div class="col text-center preview_col">
+    <div class="h3">Preview</div>
+    <app-quiz-card [card]="model" [preview]="'true'" class="text-left card d-inline-block"></app-quiz-card>
+  </div>
+</div>
+<ng-template #add_answers>
+  <div class="row">
+    <div class="col">
+      <h1 class="mb-3">Add questions</h1>
+      <button class="btn btn-primary mb-3" type="button" (click)="add_answers_mode = false">Back</button>
+      <div class="d-flex box-content">
+        <div class="w-50">
+          <app-add-question [questions]="model.questions" (picked_question)="pick_one($event)" (removed_question)="pick_one($event)" ></app-add-question>
+        </div>
+        <div class="w-50 add_answer">
+          <app-add-answer *ngIf="picked" [answers]="picked.answers"></app-add-answer>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>

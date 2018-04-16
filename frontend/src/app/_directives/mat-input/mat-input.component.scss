@@ -1,0 +1,73 @@
+@import "./variables";
+$mat_input: '.mat_input';
+#{$mat_input}{
+  position: relative;
+  width: 100%;
+  z-index: 0;
+  &__placeholder{
+    z-index: 0;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translate(0, -50%);
+    -webkit-transition: all .2s ease;
+    -moz-transition: all .2s ease;
+    -ms-transition: all .2s ease;
+    -o-transition: all .2s ease;
+    transition: all .2s ease;
+  }
+  &__input{
+    font-size: 14px;
+    position: relative;
+    z-index: 1;
+    background: transparent;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border: none;
+    border-bottom: 1px solid #ccc;
+    padding: 10px 0;
+    margin: 0;
+    display: block;
+    width: 100%;
+    line-height: 1;
+    &:focus{
+      outline: none;
+      box-shadow: none;
+    }
+  }
+  &:after{
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 1px;
+    background: $theme_color;
+    transform: translate(-50%, 0);
+    -webkit-transition: all .2s ease;
+    -moz-transition: all .2s ease;
+    -ms-transition: all .2s ease;
+    -o-transition: all .2s ease;
+    transition: all .2s ease;
+    z-index: 3;
+  }
+  &.lock{
+    #{$mat_input}{
+      &__placeholder{
+        font-size: 12px;
+        top: -6px;
+      }
+    }
+  }
+  &.active{
+    &:after{
+      width: 100%;
+    }
+    #{$mat_input}{
+      &__placeholder{
+        color:$theme_color;
+      }
+    }
+  }
+}

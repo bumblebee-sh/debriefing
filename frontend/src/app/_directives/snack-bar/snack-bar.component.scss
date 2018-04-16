@@ -1,0 +1,23 @@
+.snack{
+  position: fixed;
+  left: 50%;
+  bottom: 0;
+  transform: translate(-50%, 100%);
+  background: rgba(0,0,0,.8);
+  padding: 10px 30px;
+  color:#fff;
+  z-index: 9999;
+  font-size: 16px;
+  -webkit-transition: all .3s ease;
+  -moz-transition: all .3s ease;
+  -ms-transition: all .3s ease;
+  -o-transition: all .3s ease;
+  transition: all .3s ease;
+  &.show{
+    transform: translate(-50%, 0);
+  }
+  .err{
+    color:red;
+    padding-left: 30px;
+  }
+}

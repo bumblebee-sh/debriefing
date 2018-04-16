@@ -1,0 +1,16 @@
+:host{
+  position: relative;
+  display: block;
+}
+.card-title{
+  margin-bottom: 0;
+}
+.card-rating ::ng-deep .material-icons{
+  font-size: 18px;
+}
+small{
+  font-size: 14px;
+  .material-icons{
+    font-size: 18px;
+  }
+}

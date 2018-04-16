@@ -1,0 +1,26 @@
+<img class="card-img-top" src="{{card.image}}" alt="Card image cap">
+<div class="card-body">
+  <h5 class="card-title">{{card.title}}</h5>
+  <rating class="card-rating mt-1 mb-1" [score]="card.rating" [disable]="true"></rating>
+  <p class="card-text">{{card.description}}</p>
+  <div class="card-text text-muted d-flex align-items-center justify-content-end" *ngIf="!preview; else preview_mode">
+    <button  type="button" class="btn btn-light mr-auto" (click)="take_interrogation()">GO</button>
+    <small class="d-flex align-items-center mr-3" title="Viewed times">
+      <i class="mr-1 material-icons">remove_red_eye</i> {{card.viewed}}
+    </small>
+    <small class="d-flex align-items-center" title="Passed times">
+      <i class="mr-1 material-icons">assignment_turned_in</i> {{card.passed.length}}
+    </small>
+  </div>
+  <ng-template #preview_mode>
+    <div class="card-text text-muted d-flex align-items-center">
+      <button  type="button" class="btn btn-light">GO</button>
+      <small class="d-flex align-items-center mr-3" title="Viewed times">
+        <i class="mr-1 material-icons">remove_red_eye</i> 100
+      </small>
+      <small class="d-flex align-items-center ml-auto">
+        <i class="mr-1 material-icons">remove_red_eye</i> 100
+      </small>
+    </div>
+  </ng-template>
+</div>

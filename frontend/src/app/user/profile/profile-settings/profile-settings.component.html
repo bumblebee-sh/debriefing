@@ -1,0 +1,61 @@
+<form novalidate #f="ngForm" (submit)="f.valid && update_profile(f)">
+  <div class="form-group row">
+    <label for="input_1" class="col-sm-4 col-form-label">Email</label>
+    <div class="col-sm-8">
+      <input type="email" class="form-control" id="input_1"
+             required
+             disabled
+             [(ngModel)]="model.email"
+             email
+             #email="ngModel"
+             [class.is-invalid]="(email.invalid && email.touched) || (email.invalid && f.submitted)"
+             name="email">
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="input_2" class="col-sm-4 col-form-label">Name</label>
+    <div class="col-sm-8">
+      <input type="text" class="form-control" id="input_2"
+             required
+             [(ngModel)]="model.name"
+             #name="ngModel"
+             [class.is-invalid]="(name.invalid && name.touched) || (name.invalid && f.submitted)"
+             name="name">
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="input_image" class="col-sm-4 col-form-label">Image</label>
+    <div class="col-sm-8">
+      <div class="custom-file">
+        <input type="file" class="custom-file-input" id="input_image"
+               [class.is-invalid]="img_err"
+               (change)="image_pick($event)"
+               name="image"
+               accept="image/*"
+               [(ngModel)]="image">
+        <label class="custom-file-label" for="input_image">{{img_text}}</label>
+        <div class="invalid-feedback">Over 2mb</div>
+      </div>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="input_3" class="col-sm-4 col-form-label">Date of birth</label>
+    <div class="col-sm-8">
+      <input type="text" class="form-control" id="input_3"
+             required
+             bsDatepicker
+             [(ngModel)]="model.birthday"
+             #birth_day="ngModel"
+             [class.is-invalid]="(birth_day.invalid && birth_day.touched) || (birth_day.invalid && f.submitted)"
+             name="birth_day">
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="input_4" class="col-sm-4 col-form-label">About</label>
+    <div class="col-sm-8">
+      <textarea name="about" class="form-control" id="input_4"
+                [(ngModel)]="model.about"></textarea>
+    </div>
+  </div>
+  <button class="btn btn-primary" type="submit">Update profile</button>
+</form>

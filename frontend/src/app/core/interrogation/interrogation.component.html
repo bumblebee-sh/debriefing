@@ -1,0 +1,25 @@
+<div class="modal-header">
+  <h4 class="modal-title pull-left">{{step != quiz.length ? quiz[step].text : 'And last step.'}}</h4>
+  <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <ul *ngIf="step != quiz.length; else finish_quiz" class="answer">
+    <li class="answer__item" *ngFor="let answer of quiz[step].answers" [class.active]="answer.status" (click)="pick_it(answer)">
+      <i class="icn material-icons">check</i> {{answer.text}}
+    </li>
+  </ul>
+  <div class="text-danger" *ngIf="step_err">Please select at least one.</div>
+  <ng-template #finish_quiz>
+    <app-finish-quiz (send_data)="save_qiuz($event)" ></app-finish-quiz>
+  </ng-template>
+</div>
+<div class="modal-footer flex-wrap align-items-center" *ngIf="step != quiz.length">
+  <div class="progress w-100 mb-3">
+    <div class="progress-bar" role="progressbar" [ngStyle]="{'width.%': 100 * (step) / (quiz.length-1)}"></div>
+  </div>
+  <small class="mr-auto text-muted" *ngIf="step != quiz.length">{{step+1}} / {{quiz.length}}</small>
+  <button type="button" class="btn btn-light" *ngIf="step != 0" (click)="prev_question()">Prev</button>
+  <button type="button" class="btn btn-light" (click)="next_question()">Next</button>
+</div>

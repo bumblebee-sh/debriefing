@@ -1,0 +1,44 @@
+<h1 class="page_title mb-4">Quizzes <small> / detail: <b>{{feedback_list?.title}}</b></small> </h1>
+<app-feedback-detail *ngIf="!list_mode" [feedback_info]="current_feedback" (go_back)="toggle_mode()" ></app-feedback-detail>
+<ng-container *ngIf="list_mode">
+  <a class="btn btn-primary mb-3" routerLink="/user/quizzes/">Back</a>
+  <div class="page_content">
+    <ng-template #no_item>
+      <div class="minh-100">
+        <h3 class="p-5 text-center">No one passed it, yet.</h3>
+      </div>
+    </ng-template>
+    <table class="table" *ngIf="feedback_list.passed?.length; else no_item">
+      <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col" class="text-center">Name</th>
+        <th scope="col" class="text-center">Email</th>
+        <th scope="col" class="w-100">Feedback</th>
+        <th scope="col" class="text-center">Passed time</th>
+        <th scope="col" class="text-center">Added</th>
+        <th scope="col" class="text-center">Rating</th>
+        <th scope="col"></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let feedback of feedback_list.passed; let i = index;">
+        <td>{{i + 1}}</td>
+        <td class="text-nowrap">{{feedback.name}}</td>
+        <td>{{feedback.email}}</td>
+        <td>{{feedback.text}}</td>
+        <td class="text-center text-nowrap">{{feedback.passed_time | date:'mm:ss' }}</td>
+        <td class="text-center text-nowrap">{{feedback.added | date:'dd/MM/yyyy' }}</td>
+        <td class="text-nowrap">
+          <rating [score]="feedback.rating" [disable]="true"></rating>
+        </td>
+        <td class="text-nowrap btns">
+          <button type="button" class="btn btn-sm btn-info" (click)="pick_feedback(feedback)"><i class="material-icons">info_outline</i></button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</ng-container>
+
+

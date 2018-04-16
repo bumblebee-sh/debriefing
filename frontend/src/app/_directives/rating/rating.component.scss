@@ -1,0 +1,18 @@
+@import "variables";
+
+:host{
+  display: block;
+}
+.q_rating{
+  //display: inline-block;
+  white-space: nowrap;
+  line-height: 1;
+  &.active{
+   i{
+     cursor: pointer;
+   }
+  }
+}
+i.pick{
+  color:$t_green;
+}

@@ -1,0 +1,60 @@
+<button type="button" class="btn btn-primary mb-3" (click)="back()">Back</button>
+<div class="feedback_detail d-flex justify-content-between mb-4">
+  <div class="left_col">
+    <div class="page_content">
+      <table class="table">
+        <tr>
+          <td><b>Name</b></td>
+          <td>{{feedback_info.name}}</td>
+        </tr>
+        <tr>
+          <td><b>Email</b></td>
+          <td>{{feedback_info.email}}</td>
+        </tr>
+        <tr>
+          <td><b>Age</b></td>
+          <td>{{feedback_info.age}}</td>
+        </tr>
+        <tr>
+          <td><b>Passed</b></td>
+          <td>{{feedback_info.added | date: 'dd/MM/yyyy HH:MM '}}</td>
+        </tr>
+        <tr>
+          <td><b>Rating</b></td>
+          <td><rating [score]="feedback_info.rating" [disable]="true"></rating></td>
+        </tr>
+        <tr>
+          <td><b>Text</b></td>
+          <td>{{feedback_info.text}}</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+  <div class="right_col">
+    <div class="page_content">
+      Guest  / History of the last passed quizzes
+    </div>
+  </div>
+</div>
+
+<div class="wr_answers" [class.scroll]="feedback_info.answers.length > 4">
+  <div class="answers">
+    <div class="answers__item item" *ngFor="let answer of feedback_info.answers">
+      <div class="item__header">
+        <div class="item__passed">
+          Passed time: {{answer.passed_time | date:'mm:ss'}}
+        </div>
+        <div class="item__title">
+          {{answer.text}}
+        </div>
+      </div>
+      <div class="item__body">
+        <ul class="answer">
+          <li class="answer__item" *ngFor="let picked of answer.answers" [class.active]="picked.status">
+            <i class="icn material-icons">check</i>  {{picked.text}}
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

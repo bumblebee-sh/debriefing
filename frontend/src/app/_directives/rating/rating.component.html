@@ -1,0 +1,3 @@
+<div class="q_rating" [class.active]="!disable">
+  <i class="material-icons" *ngFor="let star of rate; let i = index"  (click)="pick(i)" [appTest]="{'type': star, 'rating': full_rating}"></i>
+</div>

@@ -1,0 +1,7 @@
+<div class="notification" [ngClass]="{'show': show, 'hide': hide}">
+  <div class="notification__text">
+    {{text}}
+  </div>
+  <i class="notification__close material-icons" (click)="hide_notification()">close</i>
+</div>
+

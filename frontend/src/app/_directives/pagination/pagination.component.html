@@ -1,0 +1,11 @@
+show on page:
+<select name="show_on_page" [(ngModel)]="model.limit" (change)="change_param()">
+  <option *ngFor="let v of page_counter; let first = first" [selected]="first"> {{v}}</option>
+</select>
+Current page:
+<select name="currenr_page" [(ngModel)]="model.page" (change)="load_new_data()">
+  <option *ngFor="let _ of all_pages; let i = index" [ngValue]="i" >{{i+1}}</option>
+</select>
+<button (click)="change_page(false)" [disabled]="model.page === 0">Previous</button>
+<button (click)="change_page(true)" [disabled]="model.page === all_pages.length-1">Next</button>
+

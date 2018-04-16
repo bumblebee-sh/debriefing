@@ -1,0 +1,13 @@
+<div class="modal-header">
+  <h4 class="modal-title pull-left">Delete <b>{{title}}</b></h4>
+  <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <div class="text-center h3 p-3">Are you sure?</div>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-danger mr-auto" (click)="delete_item()" >Delete</button>
+  <button type="button" class="btn btn-default" (click)="bsModalRef.hide()">Cancel</button>
+</div>
